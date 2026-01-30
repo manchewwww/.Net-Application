@@ -4,27 +4,27 @@ namespace WebApplication1.Repositories
 {
     public class PartRepository
     {
-        private static readonly int nextId = 1;
+        private static int nextId = 1;
         private static readonly List<PartDto> parts = [];
 
-        public static PartDto Add(PartDto part)
+        public PartDto Add(PartDto part)
         {
             part.Id = nextId++;
             parts.Add(part);
             return part;
         }
 
-        public static List<PartDto> GetAll()
+        public List<PartDto> GetAll()
         {
             return parts;
         }
 
-        public static PartDto? GetById(int id)
+        public PartDto? GetById(int id)
         {
             return parts.FirstOrDefault(part => part.Id == id);
         }
 
-        public static PartDto? Update(PartDto updatedPart)
+        public PartDto? Update(PartDto updatedPart)
         {
             var index = parts.FindIndex(p => p.Id == updatedPart.Id);
             if (index < 0)
@@ -35,7 +35,7 @@ namespace WebApplication1.Repositories
             return updatedPart;
         }
 
-        public static PartDto? Delete(int id)
+        public PartDto? Delete(int id)
         {
             var existing = parts.FirstOrDefault(p => p.Id == id);
             if (existing != null)
