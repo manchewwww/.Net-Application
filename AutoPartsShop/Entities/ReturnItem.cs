@@ -6,7 +6,7 @@ namespace AutoPartsShop.Entities
         public int ReturnId { get; set; }
         public int OrderItemId { get; set; }
         public int Quantity { get; set; }
-        public string? Condition { get; set; }
+        public required string? Condition { get; set; }
         public decimal RefundAmount { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
