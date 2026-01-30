@@ -1,4 +1,4 @@
-namespace Dtos
+namespace WebApplication1.Dtos
 {
     public class PartDto(int id, string name, decimal price)
     {

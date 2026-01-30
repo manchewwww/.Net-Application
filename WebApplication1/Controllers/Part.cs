@@ -1,4 +1,7 @@
-namespace Controllers
+using WebApplication1.Dtos;
+using WebApplication1.Services;
+
+namespace WebApplication1.Controllers
 {
 
     public static class PartController

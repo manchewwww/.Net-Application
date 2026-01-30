@@ -1,4 +1,6 @@
-namespace Repositories
+using WebApplication1.Dtos;
+
+namespace WebApplication1.Repositories
 {
     public class PartRepository
     {

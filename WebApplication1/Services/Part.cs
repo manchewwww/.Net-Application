@@ -1,4 +1,7 @@
-namespace Services
+using WebApplication1.Dtos;
+using WebApplication1.Repositories;
+
+namespace WebApplication1.Services
 {
     public class PartService(PartRepository repository)
     {
