@@ -1,11 +1,11 @@
 namespace AutoPartsShop.Entities
 {
-	public class BrandEntity
-	{
-		public int Id { get; set; }
-		public required string Name { get; set; }
-		public required string Country { get; set; }
-		public DateTime CreatedAt { get; set; }
-		public DateTime UpdatedAt { get; set; }
-	};
+    public class BrandEntity
+    {
+        public long Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string? CountryCode { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+    }
 }

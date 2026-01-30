@@ -4,11 +4,11 @@ namespace AutoPartsShop.Entities
 {
     public class PaymentEntity
     {
-        public int Id { get; set; }
-        public int OrderId { get; set; }
-        public PaymentProvider PaymentProvider { get; set; }
-        public int TransactionId { get; set; }
-        public PaymentStatus Status { get; set; }
+        public long Id { get; set; }
+        public long OrderId { get; set; }
+        public string Provider { get; set; } = string.Empty;
+        public string? ProviderRef { get; set; }
+        public PaymentStatus Status { get; set; } = PaymentStatus.PENDING;
         public decimal Amount { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

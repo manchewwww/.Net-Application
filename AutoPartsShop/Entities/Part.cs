@@ -2,15 +2,15 @@ namespace AutoPartsShop.Entities
 {
     public class PartEntity
     {
-        public int Id { get; set; }
-        public required string Sku { get; set; }
-        public int BrandId { get; set; }
-        public int CategoryId { get; set; }
-        public required string Name { get; set; }
-        public required string Description { get; set; }
-        public bool IsActive { get; set; }
-        public decimal Weight { get; set; }
+        public long Id { get; set; }
+        public string Sku { get; set; } = string.Empty;
+        public long BrandId { get; set; }
+        public long CategoryId { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string? Description { get; set; }
+        public bool IsActive { get; set; } = true;
+        public decimal? WeightKg { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-    };
+    }
 }

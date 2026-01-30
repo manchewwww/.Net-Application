@@ -4,10 +4,10 @@ namespace AutoPartsShop.Entities
 {
     public class PartFitmentEntity
     {
-        public int Id { get; set; }
-        public int TrimId { get; set; }
-        public FitmentType FitmentType { get; set; }
-        public required string[] Notes { get; set; }
+        public long PartId { get; set; }
+        public long VariantId { get; set; }
+        public FitmentType Fitment { get; set; } = FitmentType.DIRECT_FIT;
+        public string? Notes { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }

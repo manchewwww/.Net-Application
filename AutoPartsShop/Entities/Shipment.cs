@@ -4,12 +4,14 @@ namespace AutoPartsShop.Entities
 {
     public class ShipmentEntity
     {
-        public int Id { get; set; }
-        public int OrderId { get; set; }
-        public required string Carrier { get; set; }
-        public required string TrackingNumber { get; set; }
-        public ShipmentStatus ShipmentStatus { get; set; }
-        public DateTime ShippedAt { get; set; }
-        public DateTime DeliveredAt { get; set; }
-    };
+        public long Id { get; set; }
+        public long OrderId { get; set; }
+        public string Carrier { get; set; } = string.Empty;
+        public string? TrackingNumber { get; set; }
+        public ShipmentStatus Status { get; set; } = ShipmentStatus.CREATED;
+        public DateTime? ShippedAt { get; set; }
+        public DateTime? DeliveredAt { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+    }
 }

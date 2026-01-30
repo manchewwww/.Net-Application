@@ -2,10 +2,10 @@ namespace AutoPartsShop.Enums
 {
     public enum ShipmentStatus
     {
-        Pending,
-        Shipped,
-        Delivered,
-        Cancelled,
-        Returned
+        CREATED,
+        IN_TRANSIT,
+        DELIVERED,
+        LOST,
+        RETURNED
     }
 }

@@ -1,14 +1,10 @@
 namespace AutoPartsShop.Enums
 {
-    public enum PaymentProvider
-    {
-        STRIPE
-    }
-
     public enum PaymentStatus
     {
         PENDING,
-        COMPLETED,
+        AUTHORIZED,
+        CAPTURED,
         FAILED,
         REFUNDED
     }

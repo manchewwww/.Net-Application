@@ -2,12 +2,12 @@ namespace AutoPartsShop.Entities
 {
     public class ReturnItemEntity
     {
-        public int Id { get; set; }
-        public int ReturnId { get; set; }
-        public int OrderItemId { get; set; }
-        public int Quantity { get; set; }
-        public required string? Condition { get; set; }
-        public decimal RefundAmount { get; set; }
+        public long Id { get; set; }
+        public long ReturnId { get; set; }
+        public long OrderItemId { get; set; }
+        public int Qty { get; set; }
+        public string? Condition { get; set; }
+        public decimal? RefundAmount { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }
