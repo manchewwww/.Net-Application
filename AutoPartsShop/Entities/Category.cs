@@ -1,4 +1,4 @@
-namespace AutoPartsShop.Entities.Catalog
+namespace AutoPartsShop.Entities
 {
 	public class CategoryEntity(int id, int parentId, string name, string slug, DateTime createdAt, DateTime updatedAt)
 	{

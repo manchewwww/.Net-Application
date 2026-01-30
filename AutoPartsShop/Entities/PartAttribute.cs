@@ -1,4 +1,4 @@
-namespace AutoPartsShop.Entities.Catalog
+namespace AutoPartsShop.Entities
 {
     public class PartAttributeEntity(int id, int partId, string name, string value, DateTime createdAt, DateTime updatedAt)
     {

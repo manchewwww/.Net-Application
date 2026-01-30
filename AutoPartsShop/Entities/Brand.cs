@@ -1,4 +1,4 @@
-namespace AutoPartsShop.Entities.Catalog
+namespace AutoPartsShop.Entities
 {
 	public class BrandEntity(int id, string name, string country, DateTime createdAt, DateTime updatedAt)
 	{

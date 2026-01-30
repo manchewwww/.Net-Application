@@ -1,4 +1,4 @@
-namespace AutoPartsShop.Entities.Catalog
+namespace AutoPartsShop.Entities
 {
     public class PartEntity(int id, string sku, int brandId, int categoryId, string name, string description, bool isActive, decimal weight, decimal price,
         DateTime createdAt, DateTime updatedAt)
@@ -11,7 +11,6 @@ namespace AutoPartsShop.Entities.Catalog
         public string Description { get; set; } = description;
         public bool IsActive { get; set; } = isActive;
         public decimal Weight { get; set; } = weight;
-        public decimal Price { get; set; } = price;
         public DateTime CreatedAt { get; set; } = createdAt;
         public DateTime UpdatedAt { get; set; } = updatedAt;
     };

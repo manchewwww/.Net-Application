@@ -1,4 +1,4 @@
-namespace AutoPartsShop.Entities.Catalog
+namespace AutoPartsShop.Entities
 {
     public class PartImageEntity(int id, int partId, string imageUrl, int sortOrder, DateTime createdAt, DateTime updatedAt)
     {
