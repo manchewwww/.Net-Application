@@ -1,0 +1,41 @@
+# Build outputs
+**/bin/
+**/obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio
+.vs/
+
+# Visual Studio Code (optional: keep settings)
+.vscode/*
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Secrets / local configs
+**/appsettings.Development.json
+**/appsettings.*.Development.json
+**/secrets.json
+
+# NuGet
+**/packages/
+*.nupkg
+# Uncomment if you don?t want to commit package lock
+# **/packages.lock.json
