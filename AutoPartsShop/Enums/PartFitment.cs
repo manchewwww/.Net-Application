@@ -3,8 +3,8 @@ namespace AutoPartsShop.Enums
 
     public enum FitmentType
     {
-        Vehicle,
-        Engine,
-        Transmission
+        DIRECT_FIT,
+        REQUIRES_MOD,
+        UNIVERSAL
     }
 }
