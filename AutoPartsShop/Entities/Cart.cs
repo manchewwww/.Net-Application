@@ -1,10 +1,10 @@
 namespace AutoPartsShop.Entities
 {
-    public class CartEntity(int id, int customerId, DateTime createdAt, DateTime updatedAt)
+    public class CartEntity
     {
-        public int Id { get; set; } = id;
-        public int CustomerId { get; set; } = customerId;
-        public DateTime CreatedAt { get; set; } = createdAt;
-        public DateTime UpdatedAt { get; set; } = updatedAt;
+        public int Id { get; set; }
+        public int CustomerId { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     };
 }

@@ -1,14 +1,16 @@
 namespace AutoPartsShop.Entities
 {
-    public class OrderItemEntity(int id, int orderId, int partId, string sku, string name, int quantity, decimal unitPrice, decimal totalPrice)
+
+    public class OrderItemEntity
     {
-        public int Id { get; set; } = id;
-        public int OrderId { get; set; } = orderId;
-        public int PartId { get; set; } = partId;
-        public string Sku { get; set; } = sku;
-        public string Name { get; set; } = name;
-        public int Quantity { get; set; } = quantity;
-        public decimal UnitPrice { get; set; } = unitPrice;
-        public decimal TotalPrice { get; set; } = totalPrice;
+
+        public int Id { get; set; }
+        public int OrderId { get; set; }
+        public int PartId { get; set; }
+        public string Sku { get; set; } = null!;
+        public string Name { get; set; } = null!;
+        public int Quantity { get; set; }
+        public decimal UnitPrice { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 }

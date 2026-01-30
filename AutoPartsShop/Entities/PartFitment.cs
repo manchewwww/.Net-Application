@@ -2,13 +2,13 @@ using AutoPartsShop.Enums;
 
 namespace AutoPartsShop.Entities
 {
-    public class PartFitmentEntity(int id, int trimId, FitmentType fitmentType, string[] notes, DateTime createdAt, DateTime updatedAt)
+    public class PartFitmentEntity
     {
-        public int Id { get; set; } = id;
-        public int TrimId { get; set; } = trimId;
-        public FitmentType FitmentType { get; set; } = fitmentType;
-        public string[] Notes { get; set; } = notes;
-        public DateTime CreatedAt { get; set; } = createdAt;
-        public DateTime UpdatedAt { get; set; } = updatedAt;
+        public int Id { get; set; }
+        public int TrimId { get; set; }
+        public FitmentType FitmentType { get; set; }
+        public string[] Notes { get; set; } = null!;
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }
