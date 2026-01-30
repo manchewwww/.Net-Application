@@ -1,8 +1,8 @@
 using AutoPartsShop.Enums;
 
-namespace AutoPartShop.Entities
+namespace AutoPartsShop.Entities
 {
-    public class Order(int id, int orderNumber, int customerId, OrderStatus status, string currency, decimal shippingCost,
+    public class OrderEntity(int id, int orderNumber, int customerId, OrderStatus status, string currency, decimal shippingCost,
         decimal discountTotal, decimal subtotal, decimal taxTotal, decimal total, DateTime createdAt, DateTime updatedAt)
     {
         public int Id { get; set; } = id;

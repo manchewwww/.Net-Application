@@ -8,6 +8,7 @@ namespace AutoPartsShop.Entities
         public string LastName { get; set; } = lastName;
         public string Email { get; set; } = email;
         public string PhoneNumber { get; set; } = phoneNumber;
+        public string PasswordHash { get; set; } = passwordHash;
         public DateTime CreatedAt { get; set; } = createdAt;
         public DateTime UpdatedAt { get; set; } = updatedAt;
     };
