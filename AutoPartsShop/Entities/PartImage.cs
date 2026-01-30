@@ -4,7 +4,7 @@ namespace AutoPartsShop.Entities
     {
         public int Id { get; set; }
         public int PartId { get; set; }
-        public string ImageUrl { get; set; } = null!;
+        public string ImageUrl { get; set; }
         public int SortOrder { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
