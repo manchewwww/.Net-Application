@@ -6,7 +6,7 @@ namespace AutoPartsShop.Repositories
 {
     public interface ICurrencyRepository
     {
-        Task<CurrencyEntity> CreateCurrencyAsync(CurrencyEntity currency);
+        Task<CurrencyEntity> AddCurrencyAsync(CurrencyEntity currency);
         Task<CurrencyEntity?> GetCurrencyByIdAsync(long id);
         Task<IEnumerable<CurrencyEntity>> GetAllCurrencyAsync();
         Task<CurrencyEntity> UpdateCurrencyAsync(CurrencyEntity currency);
@@ -19,7 +19,7 @@ namespace AutoPartsShop.Repositories
         {
         }
 
-        public async Task<CurrencyEntity> CreateCurrencyAsync(CurrencyEntity currency)
+        public async Task<CurrencyEntity> AddCurrencyAsync(CurrencyEntity currency)
         {
             await AddAsync(currency);
             return currency;
