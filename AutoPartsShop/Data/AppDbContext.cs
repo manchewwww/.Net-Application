@@ -231,7 +231,7 @@ namespace AutoPartsShop.Data
             modelBuilder.Entity<PartFitmentEntity>(entity =>
             {
                 entity.ToTable("part_fitments");
-                entity.HasKey(e => new { e.PartId, e.VariantId });
+                entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.PartId).HasColumnName("part_id");
                 entity.Property(e => e.VariantId).HasColumnName("variant_id");
@@ -239,6 +239,7 @@ namespace AutoPartsShop.Data
                 entity.Property(e => e.Notes).HasColumnName("notes");
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
+                entity.HasIndex(e => new { e.PartId, e.VariantId }).IsUnique();
                 entity.HasIndex(e => new { e.VariantId, e.PartId }).HasDatabaseName("ix_part_fitments_variant_part");
                 entity.HasOne<PartEntity>().WithMany().HasForeignKey(e => e.PartId).OnDelete(DeleteBehavior.Cascade);
                 entity.HasOne<VehicleVariantEntity>().WithMany().HasForeignKey(e => e.VariantId).OnDelete(DeleteBehavior.Cascade);
@@ -263,7 +264,7 @@ namespace AutoPartsShop.Data
             modelBuilder.Entity<InventoryEntity>(entity =>
             {
                 entity.ToTable("inventory");
-                entity.HasKey(e => new { e.PartId, e.WarehouseId });
+                entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.PartId).HasColumnName("part_id");
                 entity.Property(e => e.WarehouseId).HasColumnName("warehouse_id");
@@ -272,6 +273,7 @@ namespace AutoPartsShop.Data
                 entity.Property(e => e.ReorderPoint).HasColumnName("reorder_point");
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
+                entity.HasIndex(e => new { e.PartId, e.WarehouseId }).IsUnique();
                 entity.HasIndex(e => e.PartId).HasDatabaseName("ix_inventory_part");
                 entity.HasIndex(e => e.WarehouseId).HasDatabaseName("ix_inventory_warehouse");
                 entity.HasOne<PartEntity>().WithMany().HasForeignKey(e => e.PartId).OnDelete(DeleteBehavior.Cascade);
@@ -383,7 +385,7 @@ namespace AutoPartsShop.Data
             modelBuilder.Entity<PartSupplierLinkEntity>(entity =>
             {
                 entity.ToTable("part_supplier_links");
-                entity.HasKey(e => new { e.PartId, e.SupplierPartId });
+                entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.PartId).HasColumnName("part_id");
                 entity.Property(e => e.SupplierPartId).HasColumnName("supplier_part_id");
@@ -391,6 +393,7 @@ namespace AutoPartsShop.Data
                 entity.Property(e => e.IsPrimary).HasColumnName("is_primary");
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
+                entity.HasIndex(e => new { e.PartId, e.SupplierPartId }).IsUnique();
                 entity.HasIndex(e => e.SupplierPartId).HasDatabaseName("ix_part_supplier_links_supplier_part");
                 entity.HasOne<PartEntity>().WithMany().HasForeignKey(e => e.PartId).OnDelete(DeleteBehavior.Cascade);
                 entity.HasOne<SupplierPartEntity>().WithMany().HasForeignKey(e => e.SupplierPartId).OnDelete(DeleteBehavior.Cascade);

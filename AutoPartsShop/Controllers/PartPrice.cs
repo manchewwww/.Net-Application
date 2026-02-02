@@ -1,0 +1,56 @@
+using AutoPartsShop.Dtos;
+using AutoPartsShop.Services;
+using Microsoft.AspNetCore.Mvc;
+
+namespace AutoPartsShop.Controllers
+{
+    [ApiController]
+    [Route("api/partprices")]
+    public class PartPriceController : ControllerBase
+    {
+        private readonly IPartPriceService _service;
+
+        public PartPriceController(IPartPriceService service)
+        {
+            _service = service;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<PartPriceResponse>> AddPartPriceAsync([FromBody] PartPriceCreateRequest request)
+        {
+            var created = await _service.AddPartPriceAsync(request);
+            if (created == null)
+            {
+                return BadRequest();
+            }
+            return Ok(created);
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<PartPriceResponse>> GetAllPartPricesAsync()
+        {
+            return await _service.GetAllPartPricesAsync();
+        }
+
+        [HttpGet("{id:long}")]
+        public async Task<ActionResult<PartPriceResponse?>> GetPartPriceByIdAsync(long id)
+        {
+            var entity = await _service.GetPartPriceByIdAsync(id);
+            return Ok(entity);
+        }
+
+        [HttpPut("{id:long}")]
+        public async Task<ActionResult> UpdatePartPriceAsync(long id, [FromBody] PartPriceUpdateRequest request)
+        {
+            var updated = await _service.UpdatePartPriceAsync(id, request);
+            return Ok(updated);
+        }
+
+        [HttpDelete("{id:long}")]
+        public async Task<ActionResult<PartPriceResponse>> DeletePartPriceAsync(long id)
+        {
+            await _service.DeletePartPriceAsync(id);
+            return Ok();
+        }
+    }
+}
