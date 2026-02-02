@@ -99,6 +99,7 @@ namespace AutoPartsShop.Data
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).HasColumnName("brand_id");
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(120);
+                entity.HasIndex(e => e.Name).IsUnique();
                 entity.Property(e => e.CountryCode).HasColumnName("country_code").HasMaxLength(2);
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
