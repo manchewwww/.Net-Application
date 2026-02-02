@@ -14,21 +14,6 @@ builder.Services.AddDbContext<AutoPartsShopDbContext>(options =>
     )
 );
 
-builder.Services.AddDbContext<AutoPartsShopDbContext>(options =>
-    options.UseNpgsql(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        o => o.MapEnum<AddressType>("address_type")
-              .MapEnum<DeliveryType>("delivery_type")
-              .MapEnum<OrderStatus>("order_status")
-              .MapEnum<PaymentStatus>("payment_status")
-              .MapEnum<ShipmentStatus>("shipment_status")
-              .MapEnum<StockMovementType>("stock_movement_type")
-              .MapEnum<ReturnStatus>("return_status")
-              .MapEnum<PartNumberType>("part_number_type")
-              .MapEnum<FitmentType>("fitment_type")
-    )
-);
-
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 
