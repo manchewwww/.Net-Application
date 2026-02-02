@@ -10,7 +10,7 @@ namespace AutoPartsShop.Converters
             return new BrandResponse(
                 Id: (int)entity.Id,
                 Name: entity.Name,
-                CountryCode: entity.CountryCode ?? string.Empty
+                CountryId: entity.CountryId
             );
         }
 
@@ -19,7 +19,7 @@ namespace AutoPartsShop.Converters
             return new BrandEntity
             {
                 Name = dto.Name,
-                CountryCode = dto.CountryCode
+                CountryId = dto.CountryId
             };
         }
 
@@ -28,7 +28,7 @@ namespace AutoPartsShop.Converters
             return new BrandEntity
             {
                 Name = dto.Name,
-                CountryCode = dto.CountryCode
+                CountryId = dto.CountryId
             };
         }
     }

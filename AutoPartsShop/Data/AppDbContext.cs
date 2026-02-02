@@ -102,10 +102,10 @@ namespace AutoPartsShop.Data
                 entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(120);
                 entity.HasIndex(e => e.Name).IsUnique();
-                entity.Property(e => e.CountryCode).HasColumnName("country_code").HasMaxLength(2);
+                entity.Property(e => e.CountryId).HasColumnName("id");
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
-                entity.HasOne<CountryEntity>().WithMany().HasForeignKey(e => e.CountryCode);
+                entity.HasOne<CountryEntity>().WithMany().HasForeignKey(e => e.CountryId);
             });
 
             modelBuilder.Entity<CategoryEntity>(entity =>

@@ -47,7 +47,7 @@ namespace AutoPartsShop.Services
         {
             var existing = await _brandRepository.GetBrandByIdAsync(id) ?? throw new NotFoundException($"Brand with ID {id} not found.");
             existing.Name = request.Name;
-            existing.CountryCode = request.CountryCode;
+            existing.CountryId = request.CountryId;
 
             await _brandRepository.UpdateBrandAsync(existing);
 
