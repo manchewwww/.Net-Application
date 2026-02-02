@@ -1,5 +1,6 @@
 using AutoPartsShop.Data;
 using AutoPartsShop.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutoPartsShop.Repositories
 {
@@ -43,6 +44,47 @@ namespace AutoPartsShop.Repositories
         public async Task DeleteBrandAsync(BrandEntity brand)
         {
             await base.DeleteAsync(brand);
+        }
+    }
+
+    public class BrandRepo : IBrandRepository
+    {
+        private readonly AutoPartsShopDbContext context;
+        private readonly DbSet<BrandEntity> dbSet;
+
+        public BrandRepo(AutoPartsShopDbContext context)
+        {
+            this.context = context;
+            dbSet = context.Set<BrandEntity>();
+        }
+
+        public async Task<BrandEntity> AddBrandAsync(BrandEntity brand)
+        {
+            await dbSet.AddAsync(brand);
+            await context.SaveChangesAsync();
+            return brand;
+        }
+
+        public async Task<BrandEntity?> GetBrandByIdAsync(long id)
+        {
+            return await dbSet.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<BrandEntity>> GetAllBrandsAsync()
+        {
+            return await dbSet.ToListAsync();
+        }
+
+        public async Task UpdateBrandAsync(BrandEntity brand)
+        {
+            dbSet.Update(brand);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task DeleteBrandAsync(BrandEntity brand)
+        {
+            dbSet.Remove(brand);
+            await context.SaveChangesAsync();
         }
     }
 }

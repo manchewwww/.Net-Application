@@ -46,4 +46,48 @@ namespace AutoPartsShop.Repositories
             await base.DeleteAsync(country);
         }
     }
+
+
+    public class CountryRepo : ICountryRepository
+    {
+        private readonly AutoPartsShopDbContext context;
+        private readonly DbSet<CountryEntity> dbSet;
+
+        public CountryRepo(AutoPartsShopDbContext context)
+        {
+            this.context = context;
+            dbSet = context.Set<CountryEntity>();
+        }
+
+        public async Task<CountryEntity?> GetCountryByIdAsync(long id)
+        {
+            return await dbSet.FindAsync(id);
+        }
+
+
+        public async Task<List<CountryEntity>> GetAllCountriesAsync()
+        {
+            return await dbSet.ToListAsync();
+        }
+
+        public async Task<CountryEntity> CreateCountryAsync(CountryEntity country)
+        {
+            await dbSet.AddAsync(country);
+            await context.SaveChangesAsync();
+            return country;
+        }
+
+        public async Task<CountryEntity> UpdateCountryAsync(CountryEntity country)
+        {
+            dbSet.Update(country);
+            await context.SaveChangesAsync();
+            return country;
+        }
+
+        public async Task DeleteCountryAsync(CountryEntity country)
+        {
+            dbSet.Remove(country);
+            await context.SaveChangesAsync();
+        }
+    }
 }

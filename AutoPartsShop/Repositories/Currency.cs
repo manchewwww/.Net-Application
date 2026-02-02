@@ -41,13 +41,51 @@ namespace AutoPartsShop.Repositories
             return currency;
         }
 
-        public async Task DeleteCurrencyAsync(long id)
+        public async Task DeleteCurrencyAsync(CurrencyEntity currency)
         {
-            var currency = await GetCurrencyByIdAsync(id);
-            if (currency != null)
-            {
-                await base.DeleteAsync(currency);
-            }
+            await base.DeleteAsync(currency);
+        }
+    }
+
+    public class CurrencyRepo : ICurrencyRepository
+    {
+        private readonly AutoPartsShopDbContext context;
+        private readonly DbSet<CurrencyEntity> dbSet;
+
+        public CurrencyRepo(AutoPartsShopDbContext context)
+        {
+            this.context = context;
+            dbSet = context.Set<CurrencyEntity>();
+        }
+
+        public async Task<CurrencyEntity> AddCurrencyAsync(CurrencyEntity currency)
+        {
+            await dbSet.AddAsync(currency);
+            await context.SaveChangesAsync();
+            return currency;
+        }
+
+        public async Task<CurrencyEntity?> GetCurrencyByIdAsync(long id)
+        {
+            return await dbSet.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<CurrencyEntity>> GetAllCurrencyAsync()
+        {
+            return await dbSet.ToListAsync();
+        }
+
+        public async Task<CurrencyEntity> UpdateCurrencyAsync(CurrencyEntity currency)
+        {
+            dbSet.Update(currency);
+            await context.SaveChangesAsync();
+            return currency;
+        }
+
+        public async Task DeleteCurrencyAsync(CurrencyEntity currency)
+        {
+            dbSet.Remove(currency);
+            await context.SaveChangesAsync();
         }
     }
 }
