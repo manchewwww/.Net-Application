@@ -12,11 +12,11 @@ namespace AutoPartsShop.Services
         public Task DeleteBrandAsync(Entities.BrandEntity brand);
     }
 
-    public class Brand
+    public class BrandService : IBrandService
     {
         private readonly IBrandRepository _brandRepository;
 
-        public Brand(IBrandRepository brandRepository)
+        public BrandService(IBrandRepository brandRepository)
         {
             _brandRepository = brandRepository;
         }
