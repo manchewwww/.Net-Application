@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AutoPartsShop.Repositories
 {
-    public interface IBrand
+    public interface IBrandRepository
     {
         public Task<BrandEntity> AddBrandAsync(BrandEntity brand);
         public Task<IEnumerable<BrandEntity>> GetAllBrandsAsync();
@@ -13,10 +13,10 @@ namespace AutoPartsShop.Repositories
         public Task DeleteBrandAsync(BrandEntity brand);
     }
 
-    public class Brand : Repository<BrandEntity>, IBrand
+    public class BrandRepository : Repository<BrandEntity>, IBrandRepository
     {
 
-        public Brand(AutoPartsShopDbContext context) : base(context)
+        public BrandRepository(AutoPartsShopDbContext context) : base(context)
         {
         }
 
