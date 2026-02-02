@@ -32,22 +32,22 @@ namespace AutoPartsShop.Controllers
             return await _brandService.GetAllBrandsAsync();
         }
 
-        [HttpGet("{id:int}")]
-        async public Task<ActionResult<BrandResponse?>> GetBrandByIdAsync(int id)
+        [HttpGet("{id:long}")]
+        async public Task<ActionResult<BrandResponse?>> GetBrandByIdAsync(long id)
         {
             var brandEntity = await _brandService.GetBrandByIdAsync(id);
-            return brandEntity == null ? NotFound() : Ok(brandEntity);
+            return Ok(brandEntity);
         }
 
-        [HttpPut("{id:int}")]
-        async public Task<ActionResult> UpdateBrandAsync(int id, [FromBody] BrandUpdateRequest brand)
+        [HttpPut("{id:long}")]
+        async public Task<ActionResult> UpdateBrandAsync(long id, [FromBody] BrandUpdateRequest brand)
         {
             var updated = await _brandService.UpdateBrandAsync(id, brand);
             return Ok(updated);
         }
 
-        [HttpDelete("{id:int}")]
-        async public Task<ActionResult<BrandResponse>> DeleteBrandAsync(int id)
+        [HttpDelete("{id:long}")]
+        async public Task<ActionResult<BrandResponse>> DeleteBrandAsync(long id)
         {
             await _brandService.DeleteBrandAsync(id);
             return Ok();

@@ -10,9 +10,9 @@ namespace AutoPartsShop.Services
     {
         public Task<BrandResponse> AddBrandAsync(BrandCreateRequest brand);
         public Task<IEnumerable<BrandResponse>> GetAllBrandsAsync();
-        public Task<BrandResponse?> GetBrandByIdAsync(int id);
-        public Task<BrandResponse> UpdateBrandAsync(int id, BrandUpdateRequest brand);
-        public Task<BrandResponse> DeleteBrandAsync(int id);
+        public Task<BrandResponse?> GetBrandByIdAsync(long id);
+        public Task<BrandResponse> UpdateBrandAsync(long id, BrandUpdateRequest brand);
+        public Task<BrandResponse> DeleteBrandAsync(long id);
     }
 
     public class BrandService : IBrandService
@@ -37,13 +37,13 @@ namespace AutoPartsShop.Services
             return brands.Select(b => b.ToDto());
         }
 
-        public async Task<BrandResponse?> GetBrandByIdAsync(int id)
+        public async Task<BrandResponse?> GetBrandByIdAsync(long id)
         {
             var brand = await _brandRepository.GetBrandByIdAsync(id) ?? throw new NotFoundException($"Brand with ID {id} not found.");
             return brand?.ToDto();
         }
 
-        public async Task<BrandResponse> UpdateBrandAsync(int id, BrandUpdateRequest request)
+        public async Task<BrandResponse> UpdateBrandAsync(long id, BrandUpdateRequest request)
         {
             var existing = await _brandRepository.GetBrandByIdAsync(id) ?? throw new NotFoundException($"Brand with ID {id} not found.");
             existing.Name = request.Name;
@@ -54,7 +54,7 @@ namespace AutoPartsShop.Services
             return existing.ToDto();
         }
 
-        public async Task<BrandResponse> DeleteBrandAsync(int id)
+        public async Task<BrandResponse> DeleteBrandAsync(long id)
         {
             var brand = await _brandRepository.GetBrandByIdAsync(id) ?? throw new NotFoundException($"Brand with ID {id} not found.");
             await _brandRepository.DeleteBrandAsync(brand);
