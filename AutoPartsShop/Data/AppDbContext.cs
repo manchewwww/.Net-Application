@@ -580,6 +580,31 @@ namespace AutoPartsShop.Data
                 entity.HasOne<ReturnEntity>().WithMany().HasForeignKey(e => e.ReturnId).OnDelete(DeleteBehavior.Cascade);
                 entity.HasOne<OrderItemEntity>().WithMany().HasForeignKey(e => e.OrderItemId);
             });
+
+            ConfigureDbManagedTimestamps(modelBuilder);
+        }
+
+        private static void ConfigureDbManagedTimestamps(ModelBuilder modelBuilder)
+        {
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                var createdAt = entityType.FindProperty("CreatedAt");
+                var updatedAt = entityType.FindProperty("UpdatedAt");
+
+                if (createdAt != null)
+                {
+                    createdAt.SetDefaultValueSql("now()");
+                    createdAt.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnAdd;
+                }
+
+                if (updatedAt != null)
+                {
+                    updatedAt.SetDefaultValueSql("now()");
+                    updatedAt.ValueGenerated = Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.OnAddOrUpdate;
+
+                    updatedAt.SetAfterSaveBehavior(Microsoft.EntityFrameworkCore.Metadata.PropertySaveBehavior.Ignore);
+                }
+            }
         }
     }
 }
