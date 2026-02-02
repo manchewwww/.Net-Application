@@ -24,6 +24,10 @@ builder.Services.AddScoped<ICountryService, CountryService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -34,5 +38,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
+
+app.UseMiddleware<AutoPartsShop.Middlewares.ExceptionHandlingMiddleware>();
 app.MapControllers();
 app.Run();
