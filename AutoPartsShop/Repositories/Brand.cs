@@ -8,7 +8,7 @@ namespace AutoPartsShop.Repositories
     {
         public Task<BrandEntity> AddBrandAsync(BrandEntity brand);
         public Task<IEnumerable<BrandEntity>> GetAllBrandsAsync();
-        public Task<BrandEntity?> GetBrandByIdAsync(int id);
+        public Task<BrandEntity?> GetBrandByIdAsync(long id);
         public Task UpdateBrandAsync(BrandEntity brand);
         public Task DeleteBrandAsync(BrandEntity brand);
     }
@@ -26,7 +26,7 @@ namespace AutoPartsShop.Repositories
             return brand;
         }
 
-        public async Task<BrandEntity?> GetBrandByIdAsync(int id)
+        public async Task<BrandEntity?> GetBrandByIdAsync(long id)
         {
             return await base.GetByIdAsync(id);
         }

@@ -14,7 +14,7 @@ namespace AutoPartsShop.Repositories
             DbSet = context.Set<T>();
         }
 
-        public virtual async Task<T?> GetByIdAsync(int id)
+        public virtual async Task<T?> GetByIdAsync(long id)
         {
             return await DbSet.FindAsync(id);
         }
