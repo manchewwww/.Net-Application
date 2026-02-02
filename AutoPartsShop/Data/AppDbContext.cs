@@ -73,6 +73,7 @@ namespace AutoPartsShop.Data
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.CurrencyCode).HasColumnName("currency_code").HasMaxLength(3);
+                entity.HasIndex(e => e.CurrencyCode).IsUnique();
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(60);
                 entity.Property(e => e.Symbol).HasColumnName("symbol").HasMaxLength(10);
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");

@@ -1,7 +1,6 @@
 using AutoPartsShop.Dtos;
 using AutoPartsShop.Services;
 using Microsoft.AspNetCore.Mvc;
-using AutoPartsShop.Exceptions;
 
 namespace AutoPartsShop.Controllers
 {
