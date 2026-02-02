@@ -1,5 +1,6 @@
 using AutoPartsShop.Services;
 using Microsoft.AspNetCore.Mvc;
+using AutoPartsShop.Dtos;
 
 namespace AutoPartsShop.Controllers
 {
@@ -15,52 +16,55 @@ namespace AutoPartsShop.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Entities.BrandEntity>> AddBrandAsync([FromBody] Entities.BrandEntity brand)
+        public async Task<ActionResult<BrandResponse>> AddBrandAsync([FromBody] BrandCreateRequest brand)
         {
             var created = await _brandService.AddBrandAsync(brand);
-            return CreatedAtAction(nameof(GetBrandByIdAsync), new { id = created.Id }, created);
+            if (created == null)
+            {
+                return BadRequest();
+            }
+            return Ok(created);
         }
 
         [HttpGet]
-        async public Task<IEnumerable<Entities.BrandEntity>> GetAllBrandsAsync()
+        async public Task<IEnumerable<BrandResponse>> GetAllBrandsAsync()
         {
             return await _brandService.GetAllBrandsAsync();
         }
 
         [HttpGet("{id:int}")]
-        async public Task<ActionResult<Entities.BrandEntity?>> GetBrandByIdAsync(int id)
+        async public Task<ActionResult<BrandResponse?>> GetBrandByIdAsync(int id)
         {
             var brandEntity = await _brandService.GetBrandByIdAsync(id);
             return brandEntity == null ? NotFound() : Ok(brandEntity);
         }
 
         [HttpPut("{id:int}")]
-        async public Task<ActionResult> UpdateBrandAsync(int id, [FromBody] Entities.BrandEntity brand)
+        async public Task<ActionResult> UpdateBrandAsync(int id, [FromBody] BrandUpdateRequest brand)
         {
             if (brand.Id != 0 && brand.Id != id)
             {
                 return BadRequest("ID mismatch.");
             }
-            brand.Id = id;
             var existing = await _brandService.GetBrandByIdAsync(id);
             if (existing is null)
             {
                 return NotFound();
             }
 
-            await _brandService.UpdateBrandAsync(brand);
-            return NoContent();
+            var updated = await _brandService.UpdateBrandAsync(id, brand);
+            return Ok(updated);
         }
 
         [HttpDelete("{id:int}")]
-        async public Task<IActionResult> DeleteBrandAsync(int id)
+        async public Task<ActionResult<BrandResponse>> DeleteBrandAsync(int id)
         {
             var brand = await _brandService.GetBrandByIdAsync(id);
             if (brand == null)
             {
                 return NotFound();
             }
-            await _brandService.DeleteBrandAsync(brand);
+            await _brandService.DeleteBrandAsync(id);
             return Ok();
         }
     }
