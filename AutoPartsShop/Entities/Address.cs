@@ -13,7 +13,7 @@ namespace AutoPartsShop.Entities
         public string City { get; set; } = string.Empty;
         public string? Region { get; set; }
         public string? PostalCode { get; set; }
-        public string CountryCode { get; set; } = string.Empty;
+        public long CountryId { get; set; }
         public bool IsDefault { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

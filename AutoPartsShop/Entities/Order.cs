@@ -18,7 +18,7 @@ namespace AutoPartsShop.Entities
         public DeliveryType DeliveryType { get; set; }
         public string ShippingName { get; set; } = string.Empty;
         public string ShippingPhone { get; set; } = string.Empty;
-        public string ShippingCountryCode { get; set; } = string.Empty;
+        public long ShippingCountryId { get; set; }
         public string ShippingCity { get; set; } = string.Empty;
         public string ShippingAddress1 { get; set; } = string.Empty;
         public string? ShippingAddress2 { get; set; }

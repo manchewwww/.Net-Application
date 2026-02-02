@@ -4,7 +4,7 @@ namespace AutoPartsShop.Entities
     {
         public long Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public string CountryCode { get; set; } = string.Empty;
+        public long CountryId { get; set; }
         public string City { get; set; } = string.Empty;
         public string Address1 { get; set; } = string.Empty;
         public string? Address2 { get; set; }
