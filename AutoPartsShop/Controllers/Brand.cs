@@ -4,7 +4,7 @@ using AutoPartsShop.Dtos;
 
 namespace AutoPartsShop.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/brands")]
     [ApiController]
     public class BrandController : ControllerBase
     {
