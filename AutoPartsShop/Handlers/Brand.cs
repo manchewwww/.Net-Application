@@ -15,9 +15,10 @@ namespace AutoPartsShop.Handlers
         }
 
         [HttpPost]
-        async public Task<Entities.BrandEntity> AddBrandAsync(Entities.BrandEntity brand)
+        public async Task<ActionResult<Entities.BrandEntity>> AddBrandAsync([FromBody] Entities.BrandEntity brand)
         {
-            return await _brandService.AddBrandAsync(brand);
+            var created = await _brandService.AddBrandAsync(brand);
+            return CreatedAtAction(nameof(GetBrandByIdAsync), new { id = created.Id }, created);
         }
 
         [HttpGet]
@@ -27,16 +28,28 @@ namespace AutoPartsShop.Handlers
         }
 
         [HttpGet("{id:int}")]
-        async public Task<Entities.BrandEntity?> GetBrandByIdAsync(int id)
+        async public Task<ActionResult<Entities.BrandEntity?>> GetBrandByIdAsync(int id)
         {
-            return await _brandService.GetBrandByIdAsync(id);
+            var brandEntity = await _brandService.GetBrandByIdAsync(id);
+            return brandEntity == null ? NotFound() : Ok(brandEntity);
         }
 
         [HttpPut("{id:int}")]
-        async public Task UpdateBrandAsync(int id, Entities.BrandEntity brand)
+        async public Task<ActionResult> UpdateBrandAsync(int id, [FromBody] Entities.BrandEntity brand)
         {
+            if (brand.Id != 0 && brand.Id != id)
+            {
+                return BadRequest("ID mismatch.");
+            }
             brand.Id = id;
+            var existing = await _brandService.GetBrandByIdAsync(id);
+            if (existing is null)
+            {
+                return NotFound();
+            }
+
             await _brandService.UpdateBrandAsync(brand);
+            return NoContent();
         }
 
         [HttpDelete("{id:int}")]
