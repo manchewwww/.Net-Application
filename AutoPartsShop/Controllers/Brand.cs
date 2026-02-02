@@ -59,11 +59,6 @@ namespace AutoPartsShop.Controllers
         [HttpDelete("{id:int}")]
         async public Task<ActionResult<BrandResponse>> DeleteBrandAsync(int id)
         {
-            var brand = await _brandService.GetBrandByIdAsync(id);
-            if (brand == null)
-            {
-                return NotFound();
-            }
             await _brandService.DeleteBrandAsync(id);
             return Ok();
         }

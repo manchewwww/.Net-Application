@@ -1,15 +1,18 @@
 using AutoPartsShop.Repositories;
+using AutoPartsShop.Dtos;
+using AutoPartsShop.Converters;
+using AutoPartsShop.Exceptions;
 
 namespace AutoPartsShop.Services
 {
 
     public interface IBrandService
     {
-        public Task<Entities.BrandEntity> AddBrandAsync(Entities.BrandEntity brand);
-        public Task<IEnumerable<Entities.BrandEntity>> GetAllBrandsAsync();
-        public Task<Entities.BrandEntity?> GetBrandByIdAsync(int id);
-        public Task UpdateBrandAsync(Entities.BrandEntity brand);
-        public Task DeleteBrandAsync(Entities.BrandEntity brand);
+        public Task<BrandResponse> AddBrandAsync(BrandCreateRequest brand);
+        public Task<IEnumerable<BrandResponse>> GetAllBrandsAsync();
+        public Task<BrandResponse?> GetBrandByIdAsync(int id);
+        public Task<BrandResponse> UpdateBrandAsync(int id, BrandUpdateRequest brand);
+        public Task DeleteBrandAsync(int id);
     }
 
     public class BrandService : IBrandService
@@ -21,28 +24,36 @@ namespace AutoPartsShop.Services
             _brandRepository = brandRepository;
         }
 
-        public async Task<Entities.BrandEntity> AddBrandAsync(Entities.BrandEntity brand)
+        public async Task<BrandResponse> AddBrandAsync(BrandCreateRequest request)
         {
-            return await _brandRepository.AddBrandAsync(brand);
+            var brand = request.ToEntity();
+            var createdBrand = await _brandRepository.AddBrandAsync(brand);
+            return createdBrand.ToDto();
         }
 
-        public async Task<IEnumerable<Entities.BrandEntity>> GetAllBrandsAsync()
+        public async Task<IEnumerable<BrandResponse>> GetAllBrandsAsync()
         {
-            return await _brandRepository.GetAllBrandsAsync();
+            var brands = await _brandRepository.GetAllBrandsAsync();
+            return brands.Select(b => b.ToDto());
         }
 
-        public async Task<Entities.BrandEntity?> GetBrandByIdAsync(int id)
+        public async Task<BrandResponse?> GetBrandByIdAsync(int id)
         {
-            return await _brandRepository.GetBrandByIdAsync(id);
+            var brand = await _brandRepository.GetBrandByIdAsync(id) ?? throw new NotFoundException($"Brand with ID {id} not found.");
+            return brand?.ToDto();
         }
 
-        public async Task UpdateBrandAsync(Entities.BrandEntity brand)
+        public async Task<BrandResponse> UpdateBrandAsync(int id, BrandUpdateRequest request)
         {
+            var brand = request.ToEntity();
+            brand.Id = id;
             await _brandRepository.UpdateBrandAsync(brand);
+            return brand.ToDto();
         }
 
-        public async Task DeleteBrandAsync(Entities.BrandEntity brand)
+        public async Task DeleteBrandAsync(int id)
         {
+            var brand = await _brandRepository.GetBrandByIdAsync(id) ?? throw new NotFoundException($"Brand with ID {id} not found.");
             await _brandRepository.DeleteBrandAsync(brand);
         }
     }
