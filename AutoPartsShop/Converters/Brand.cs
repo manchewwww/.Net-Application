@@ -27,7 +27,6 @@ namespace AutoPartsShop.Converters
         {
             return new BrandEntity
             {
-                Id = dto.Id,
                 Name = dto.Name,
                 CountryCode = dto.CountryCode
             };

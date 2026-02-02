@@ -45,10 +45,6 @@ namespace AutoPartsShop.Services
 
         public async Task<BrandResponse> UpdateBrandAsync(int id, BrandUpdateRequest request)
         {
-            if (request.Id != 0 && request.Id != id)
-            {
-                throw new BadRequestException("ID mismatch.");
-            }
             var existing = await _brandRepository.GetBrandByIdAsync(id) ?? throw new NotFoundException($"Brand with ID {id} not found.");
             existing.Name = request.Name;
             existing.CountryCode = request.CountryCode;
