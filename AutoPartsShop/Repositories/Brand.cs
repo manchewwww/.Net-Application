@@ -1,6 +1,5 @@
 using AutoPartsShop.Data;
 using AutoPartsShop.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace AutoPartsShop.Repositories
 {

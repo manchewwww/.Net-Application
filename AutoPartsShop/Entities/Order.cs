@@ -8,7 +8,7 @@ namespace AutoPartsShop.Entities
         public string OrderNumber { get; set; } = string.Empty;
         public long? CustomerId { get; set; }
         public OrderStatus Status { get; set; } = OrderStatus.NEW;
-        public string CurrencyCode { get; set; } = string.Empty;
+        public long CurrencyId { get; set; }
         public decimal Subtotal { get; set; }
         public decimal ShippingCost { get; set; }
         public decimal DiscountTotal { get; set; }

@@ -85,14 +85,14 @@ namespace AutoPartsShop.Data
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.BaseCurrencyId).HasColumnName("base_currency_id");
-                entity.Property(e => e.QuoteCurrencyCode).HasColumnName("quote_currency").HasMaxLength(3);
+                entity.Property(e => e.QuoteCurrencyId).HasColumnName("quote_currency_id").HasMaxLength(3);
                 entity.Property(e => e.Rate).HasColumnName("rate").HasColumnType("numeric(18,6)");
                 entity.Property(e => e.AsOf).HasColumnName("as_of");
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
-                entity.HasIndex(e => new { e.BaseCurrencyId, e.QuoteCurrencyCode, e.AsOf }).IsUnique();
+                entity.HasIndex(e => new { e.BaseCurrencyId, e.QuoteCurrencyId, e.AsOf }).IsUnique();
                 entity.HasOne<CurrencyEntity>().WithMany().HasForeignKey(e => e.BaseCurrencyId);
-                entity.HasOne<CurrencyEntity>().WithMany().HasForeignKey(e => e.QuoteCurrencyCode);
+                entity.HasOne<CurrencyEntity>().WithMany().HasForeignKey(e => e.QuoteCurrencyId);
             });
 
             modelBuilder.Entity<BrandEntity>(entity =>
@@ -102,7 +102,7 @@ namespace AutoPartsShop.Data
                 entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(120);
                 entity.HasIndex(e => e.Name).IsUnique();
-                entity.Property(e => e.CountryId).HasColumnName("id");
+                entity.Property(e => e.CountryId).HasColumnName("country_id");
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
                 entity.HasOne<CountryEntity>().WithMany().HasForeignKey(e => e.CountryId);
@@ -256,7 +256,7 @@ namespace AutoPartsShop.Data
                 entity.Property(e => e.Postcode).HasColumnName("postcode").HasMaxLength(20);
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
-                entity.HasOne<CountryEntity>().WithMany().HasForeignKey(e => e.Id);
+                entity.HasOne<CountryEntity>().WithMany().HasForeignKey(e => e.CountryId);
             });
 
             modelBuilder.Entity<InventoryEntity>(entity =>
@@ -301,13 +301,13 @@ namespace AutoPartsShop.Data
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(120);
-                entity.Property(e => e.CurrencyCode).HasColumnName("currency_code").HasMaxLength(3);
+                entity.Property(e => e.CurrencyId).HasColumnName("currency_id");
                 entity.Property(e => e.CountryId).HasColumnName("country_id");
                 entity.Property(e => e.IsActive).HasColumnName("is_active");
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
-                entity.HasIndex(e => new { e.Name, e.CurrencyCode, e.CountryId }).IsUnique();
-                entity.HasOne<CurrencyEntity>().WithMany().HasForeignKey(e => e.CurrencyCode);
+                entity.HasIndex(e => new { e.Name, e.CurrencyId, e.CountryId }).IsUnique();
+                entity.HasOne<CurrencyEntity>().WithMany().HasForeignKey(e => e.CurrencyId);
                 entity.HasOne<CountryEntity>().WithMany().HasForeignKey(e => e.CountryId);
             });
 
@@ -355,14 +355,14 @@ namespace AutoPartsShop.Data
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(220);
                 entity.Property(e => e.BrandName).HasColumnName("brand_name").HasMaxLength(120);
                 entity.Property(e => e.Cost).HasColumnName("cost").HasColumnType("numeric(18,2)");
-                entity.Property(e => e.CurrencyCode).HasColumnName("currency_code").HasMaxLength(3);
+                entity.Property(e => e.CurrencyId).HasColumnName("currency_id");
                 entity.Property(e => e.LeadTimeDays).HasColumnName("lead_time_days");
                 entity.Property(e => e.LastImportedAt).HasColumnName("last_imported_at");
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
                 entity.HasIndex(e => new { e.SupplierId, e.SupplierSku }).IsUnique();
                 entity.HasOne<SupplierEntity>().WithMany().HasForeignKey(e => e.SupplierId).OnDelete(DeleteBehavior.Cascade);
-                entity.HasOne<CurrencyEntity>().WithMany().HasForeignKey(e => e.CurrencyCode);
+                entity.HasOne<CurrencyEntity>().WithMany().HasForeignKey(e => e.CurrencyId);
             });
 
             modelBuilder.Entity<SupplierPartNumberEntity>(entity =>
@@ -453,7 +453,7 @@ namespace AutoPartsShop.Data
                 entity.Property(e => e.OrderNumber).HasColumnName("order_number").HasMaxLength(40);
                 entity.Property(e => e.CustomerId).HasColumnName("customer_id");
                 entity.Property(e => e.Status).HasColumnName("status").HasColumnType("order_status");
-                entity.Property(e => e.CurrencyCode).HasColumnName("currency_code").HasMaxLength(3);
+                entity.Property(e => e.CurrencyId).HasColumnName("currency_id");
                 entity.Property(e => e.Subtotal).HasColumnName("subtotal").HasColumnType("numeric(18,2)");
                 entity.Property(e => e.ShippingCost).HasColumnName("shipping_cost").HasColumnType("numeric(18,2)");
                 entity.Property(e => e.DiscountTotal).HasColumnName("discount_total").HasColumnType("numeric(18,2)");
@@ -475,7 +475,7 @@ namespace AutoPartsShop.Data
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
                 entity.HasIndex(e => new { e.CustomerId, e.CreatedAt }).HasDatabaseName("ix_orders_customer_created");
                 entity.HasOne<CustomerEntity>().WithMany().HasForeignKey(e => e.CustomerId).OnDelete(DeleteBehavior.SetNull);
-                entity.HasOne<CurrencyEntity>().WithMany().HasForeignKey(e => e.CurrencyCode);
+                entity.HasOne<CurrencyEntity>().WithMany().HasForeignKey(e => e.CurrencyId);
                 entity.HasOne<CountryEntity>().WithMany().HasForeignKey(e => e.ShippingCountryId);
             });
 
