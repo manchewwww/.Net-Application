@@ -2,7 +2,8 @@ namespace AutoPartsShop.Entities
 {
     public class CurrencyEntity
     {
-        public string Id { get; set; } = string.Empty;
+        public long Id { get; set; }
+        public string CurrencyCode { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
         public string? Symbol { get; set; }
         public DateTime CreatedAt { get; set; }

@@ -2,6 +2,7 @@ namespace AutoPartsShop.Entities
 {
     public class PartSupplierLinkEntity
     {
+        public long Id { get; set; }
         public long PartId { get; set; }
         public long SupplierPartId { get; set; }
         public int Priority { get; set; } = 1;

@@ -60,7 +60,8 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("countries");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("country_code").HasMaxLength(2);
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.CountryCode).HasColumnName("country_code").HasMaxLength(2);
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(120);
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
@@ -70,7 +71,8 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("currencies");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("currency_code").HasMaxLength(3);
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.CurrencyCode).HasColumnName("currency_code").HasMaxLength(3);
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(60);
                 entity.Property(e => e.Symbol).HasColumnName("symbol").HasMaxLength(10);
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");
@@ -97,7 +99,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("brands");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("brand_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(120);
                 entity.HasIndex(e => e.Name).IsUnique();
                 entity.Property(e => e.CountryCode).HasColumnName("country_code").HasMaxLength(2);
@@ -110,7 +112,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("categories");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("category_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.ParentCategoryId).HasColumnName("parent_category_id");
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(160);
                 entity.Property(e => e.Slug).HasColumnName("slug").HasMaxLength(180);
@@ -126,7 +128,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("parts");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("part_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.Sku).HasColumnName("sku").HasMaxLength(60);
                 entity.Property(e => e.BrandId).HasColumnName("brand_id");
                 entity.Property(e => e.CategoryId).HasColumnName("category_id");
@@ -146,7 +148,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("part_images");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("image_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.PartId).HasColumnName("part_id");
                 entity.Property(e => e.Url).HasColumnName("url");
                 entity.Property(e => e.SortOrder).HasColumnName("sort_order");
@@ -159,7 +161,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("part_numbers");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("part_number_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.PartId).HasColumnName("part_id");
                 entity.Property(e => e.Type).HasColumnName("type").HasColumnType("part_number_type");
                 entity.Property(e => e.Value).HasColumnName("value").HasMaxLength(140);
@@ -174,7 +176,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("part_attributes");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("part_attribute_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.PartId).HasColumnName("part_id");
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(80);
                 entity.Property(e => e.Value).HasColumnName("value").HasMaxLength(180);
@@ -188,7 +190,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("vehicle_makes");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("make_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(120);
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
@@ -198,7 +200,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("vehicle_models");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("model_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.MakeId).HasColumnName("make_id");
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(120);
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");
@@ -212,7 +214,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("vehicle_variants");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("variant_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.ModelId).HasColumnName("model_id");
                 entity.Property(e => e.YearFrom).HasColumnName("year_from");
                 entity.Property(e => e.YearTo).HasColumnName("year_to");
@@ -229,6 +231,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("part_fitments");
                 entity.HasKey(e => new { e.PartId, e.VariantId });
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.PartId).HasColumnName("part_id");
                 entity.Property(e => e.VariantId).HasColumnName("variant_id");
                 entity.Property(e => e.Fitment).HasColumnName("fitment").HasColumnType("fitment_type");
@@ -244,7 +247,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("warehouses");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("warehouse_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(120);
                 entity.Property(e => e.CountryCode).HasColumnName("country_code").HasMaxLength(2);
                 entity.Property(e => e.City).HasColumnName("city").HasMaxLength(120);
@@ -260,6 +263,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("inventory");
                 entity.HasKey(e => new { e.PartId, e.WarehouseId });
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.PartId).HasColumnName("part_id");
                 entity.Property(e => e.WarehouseId).HasColumnName("warehouse_id");
                 entity.Property(e => e.QtyOnHand).HasColumnName("qty_on_hand");
@@ -277,7 +281,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("stock_movements");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("movement_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.PartId).HasColumnName("part_id");
                 entity.Property(e => e.WarehouseId).HasColumnName("warehouse_id");
                 entity.Property(e => e.Type).HasColumnName("type").HasColumnType("stock_movement_type");
@@ -295,7 +299,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("price_lists");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("price_list_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(120);
                 entity.Property(e => e.CurrencyCode).HasColumnName("currency_code").HasMaxLength(3);
                 entity.Property(e => e.CountryCode).HasColumnName("country_code").HasMaxLength(2);
@@ -311,7 +315,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("part_prices");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("part_price_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.PartId).HasColumnName("part_id");
                 entity.Property(e => e.PriceListId).HasColumnName("price_list_id");
                 entity.Property(e => e.ListPrice).HasColumnName("list_price").HasColumnType("numeric(18,2)");
@@ -330,7 +334,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("suppliers");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("supplier_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(160);
                 entity.Property(e => e.CountryCode).HasColumnName("country_code").HasMaxLength(2);
                 entity.Property(e => e.Email).HasColumnName("email").HasMaxLength(200);
@@ -345,7 +349,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("supplier_parts");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("supplier_part_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.SupplierId).HasColumnName("supplier_id");
                 entity.Property(e => e.SupplierSku).HasColumnName("supplier_sku").HasMaxLength(80);
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(220);
@@ -379,6 +383,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("part_supplier_links");
                 entity.HasKey(e => new { e.PartId, e.SupplierPartId });
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.PartId).HasColumnName("part_id");
                 entity.Property(e => e.SupplierPartId).HasColumnName("supplier_part_id");
                 entity.Property(e => e.Priority).HasColumnName("priority");
@@ -394,7 +399,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("import_jobs");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("import_job_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.SupplierId).HasColumnName("supplier_id");
                 entity.Property(e => e.Status).HasColumnName("status").HasMaxLength(20);
                 entity.Property(e => e.StartedAt).HasColumnName("started_at");
@@ -410,7 +415,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("customers");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("customer_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.Email).HasColumnName("email").HasMaxLength(200);
                 entity.Property(e => e.Phone).HasColumnName("phone").HasMaxLength(40);
                 entity.Property(e => e.PasswordHash).HasColumnName("password_hash");
@@ -422,7 +427,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("addresses");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("address_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.CustomerId).HasColumnName("customer_id");
                 entity.Property(e => e.Type).HasColumnName("type").HasColumnType("address_type");
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(200);
@@ -444,7 +449,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("orders");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("order_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.OrderNumber).HasColumnName("order_number").HasMaxLength(40);
                 entity.Property(e => e.CustomerId).HasColumnName("customer_id");
                 entity.Property(e => e.Status).HasColumnName("status").HasColumnType("order_status");
@@ -478,7 +483,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("order_items");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("order_item_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.OrderId).HasColumnName("order_id");
                 entity.Property(e => e.PartId).HasColumnName("part_id");
                 entity.Property(e => e.SkuSnapshot).HasColumnName("sku_snapshot").HasMaxLength(60);
@@ -497,7 +502,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("payments");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("payment_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.OrderId).HasColumnName("order_id");
                 entity.Property(e => e.Provider).HasColumnName("provider").HasMaxLength(40);
                 entity.Property(e => e.ProviderRef).HasColumnName("provider_ref").HasMaxLength(120);
@@ -513,7 +518,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("shipments");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("shipment_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.OrderId).HasColumnName("order_id");
                 entity.Property(e => e.Carrier).HasColumnName("carrier").HasMaxLength(80);
                 entity.Property(e => e.TrackingNumber).HasColumnName("tracking_number").HasMaxLength(120);
@@ -530,7 +535,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("carts");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("cart_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.CustomerId).HasColumnName("customer_id");
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
@@ -541,7 +546,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("cart_items");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("cart_item_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.CartId).HasColumnName("cart_id");
                 entity.Property(e => e.PartId).HasColumnName("part_id");
                 entity.Property(e => e.Qty).HasColumnName("qty");
@@ -556,7 +561,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("returns");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("return_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.OrderId).HasColumnName("order_id");
                 entity.Property(e => e.Status).HasColumnName("status").HasColumnType("return_status");
                 entity.Property(e => e.Reason).HasColumnName("reason");
@@ -570,7 +575,7 @@ namespace AutoPartsShop.Data
             {
                 entity.ToTable("return_items");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).HasColumnName("return_item_id");
+                entity.Property(e => e.Id).HasColumnName("id");
                 entity.Property(e => e.ReturnId).HasColumnName("return_id");
                 entity.Property(e => e.OrderItemId).HasColumnName("order_item_id");
                 entity.Property(e => e.Qty).HasColumnName("qty");

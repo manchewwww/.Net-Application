@@ -2,6 +2,7 @@ namespace AutoPartsShop.Entities
 {
     public class InventoryEntity
     {
+        public long Id { get; set; }
         public long PartId { get; set; }
         public long WarehouseId { get; set; }
         public int QtyOnHand { get; set; }
