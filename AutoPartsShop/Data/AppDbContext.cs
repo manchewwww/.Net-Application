@@ -46,15 +46,15 @@ namespace AutoPartsShop.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasPostgresEnum<PartNumberType>("part_number_type");
-            modelBuilder.HasPostgresEnum<FitmentType>("fitment_type");
-            modelBuilder.HasPostgresEnum<OrderStatus>("order_status");
-            modelBuilder.HasPostgresEnum<PaymentStatus>("payment_status");
-            modelBuilder.HasPostgresEnum<ShipmentStatus>("shipment_status");
-            modelBuilder.HasPostgresEnum<AddressType>("address_type");
-            modelBuilder.HasPostgresEnum<DeliveryType>("delivery_type");
-            modelBuilder.HasPostgresEnum<StockMovementType>("stock_movement_type");
-            modelBuilder.HasPostgresEnum<ReturnStatus>("return_status");
+            modelBuilder.HasPostgresEnum<PartNumberType>("public", "part_number_type");
+            modelBuilder.HasPostgresEnum<FitmentType>("public", "fitment_type");
+            modelBuilder.HasPostgresEnum<OrderStatus>("public", "order_status");
+            modelBuilder.HasPostgresEnum<PaymentStatus>("public", "payment_status");
+            modelBuilder.HasPostgresEnum<ShipmentStatus>("public", "shipment_status");
+            modelBuilder.HasPostgresEnum<AddressType>("public", "address_type");
+            modelBuilder.HasPostgresEnum<DeliveryType>("public", "delivery_type");
+            modelBuilder.HasPostgresEnum<StockMovementType>("public", "stock_movement_type");
+            modelBuilder.HasPostgresEnum<ReturnStatus>("public", "return_status");
 
             modelBuilder.Entity<CountryEntity>(entity =>
             {
