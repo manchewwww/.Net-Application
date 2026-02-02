@@ -10,7 +10,7 @@ namespace AutoPartsShop.Repositories
         Task<CurrencyEntity?> GetCurrencyByIdAsync(long id);
         Task<IEnumerable<CurrencyEntity>> GetAllCurrencyAsync();
         Task<CurrencyEntity> UpdateCurrencyAsync(CurrencyEntity currency);
-        Task DeleteCurrencyAsync(long id);
+        Task DeleteCurrencyAsync(CurrencyEntity currency);
     }
 
     public class CurrencyRepository : Repository<CurrencyEntity>, ICurrencyRepository

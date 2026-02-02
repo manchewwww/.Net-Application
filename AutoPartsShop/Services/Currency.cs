@@ -56,7 +56,7 @@ namespace AutoPartsShop.Services
         public async Task<CurrencyResponse> DeleteCurrencyAsync(long id)
         {
             var currency = await _currencyRepository.GetCurrencyByIdAsync(id) ?? throw new NotFoundException($"Currency with ID {id} not found.");
-            await _currencyRepository.DeleteCurrencyAsync(id);
+            await _currencyRepository.DeleteCurrencyAsync(currency);
             return currency.ToDto();
         }
     }
