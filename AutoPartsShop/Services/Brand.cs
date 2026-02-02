@@ -45,10 +45,13 @@ namespace AutoPartsShop.Services
 
         public async Task<BrandResponse> UpdateBrandAsync(int id, BrandUpdateRequest request)
         {
-            var brand = request.ToEntity();
-            brand.Id = id;
-            await _brandRepository.UpdateBrandAsync(brand);
-            return brand.ToDto();
+            var existing = await _brandRepository.GetBrandByIdAsync(id) ?? throw new NotFoundException($"Brand with ID {id} not found.");
+            existing.Name = request.Name;
+            existing.CountryCode = request.CountryCode;
+
+            await _brandRepository.UpdateBrandAsync(existing);
+
+            return existing.ToDto();
         }
 
         public async Task DeleteBrandAsync(int id)
