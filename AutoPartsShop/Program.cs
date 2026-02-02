@@ -2,7 +2,6 @@ using AutoPartsShop.Data;
 using AutoPartsShop.Repositories;
 using AutoPartsShop.Services;
 using Microsoft.EntityFrameworkCore;
-using AutoPartsShop.Enums;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,9 +15,11 @@ builder.Services.AddDbContext<AutoPartsShopDbContext>(options =>
 
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 builder.Services.AddScoped<ICurrencyRepository, CurrencyRepository>();
+builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<ICurrencyService, CurrencyService>();
+builder.Services.AddScoped<ICountryService, CountryService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

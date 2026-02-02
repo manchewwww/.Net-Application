@@ -8,7 +8,7 @@ namespace AutoPartsShop.Repositories
     {
         Task<CountryEntity?> GetCountryByIdAsync(long id);
         Task<List<CountryEntity>> GetAllCountriesAsync();
-        Task<CountryEntity> CreateCountryAsync(CountryEntity country);
+        Task<CountryEntity> AddCountryAsync(CountryEntity country);
         Task<CountryEntity> UpdateCountryAsync(CountryEntity country);
         Task DeleteCountryAsync(CountryEntity country);
     }
@@ -19,7 +19,7 @@ namespace AutoPartsShop.Repositories
         {
         }
 
-        public async Task<CountryEntity> CreateCountryAsync(CountryEntity country)
+        public async Task<CountryEntity> AddCountryAsync(CountryEntity country)
         {
             await base.AddAsync(country);
             return country;
@@ -70,7 +70,7 @@ namespace AutoPartsShop.Repositories
             return await dbSet.ToListAsync();
         }
 
-        public async Task<CountryEntity> CreateCountryAsync(CountryEntity country)
+        public async Task<CountryEntity> AddCountryAsync(CountryEntity country)
         {
             await dbSet.AddAsync(country);
             await context.SaveChangesAsync();
