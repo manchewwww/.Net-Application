@@ -42,16 +42,6 @@ namespace AutoPartsShop.Controllers
         [HttpPut("{id:int}")]
         async public Task<ActionResult> UpdateBrandAsync(int id, [FromBody] BrandUpdateRequest brand)
         {
-            if (brand.Id != 0 && brand.Id != id)
-            {
-                return BadRequest("ID mismatch.");
-            }
-            var existing = await _brandService.GetBrandByIdAsync(id);
-            if (existing is null)
-            {
-                return NotFound();
-            }
-
             var updated = await _brandService.UpdateBrandAsync(id, brand);
             return Ok(updated);
         }
