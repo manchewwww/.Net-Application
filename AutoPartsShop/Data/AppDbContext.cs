@@ -61,7 +61,7 @@ namespace AutoPartsShop.Data
                 entity.ToTable("countries");
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).HasColumnName("id");
-                entity.Property(e => e.CountryCode).HasColumnName("country_code").HasMaxLength(2);
+                entity.Property(e => e.Code).HasColumnName("code").HasMaxLength(2);
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(120);
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
@@ -72,8 +72,8 @@ namespace AutoPartsShop.Data
                 entity.ToTable("currencies");
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).HasColumnName("id");
-                entity.Property(e => e.CurrencyCode).HasColumnName("currency_code").HasMaxLength(3);
-                entity.HasIndex(e => e.CurrencyCode).IsUnique();
+                entity.Property(e => e.Code).HasColumnName("code").HasMaxLength(3);
+                entity.HasIndex(e => e.Code).IsUnique();
                 entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(60);
                 entity.Property(e => e.Symbol).HasColumnName("symbol").HasMaxLength(10);
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");
