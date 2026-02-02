@@ -45,7 +45,7 @@ namespace AutoPartsShop.Services
         public async Task<CurrencyResponse> UpdateCurrencyAsync(long id, CurrencyUpdateRequest request)
         {
             var existing = await _currencyRepository.GetCurrencyByIdAsync(id) ?? throw new NotFoundException($"Currency with ID {id} not found.");
-            existing.CurrencyCode = request.CurrencyCode;
+            existing.Code = request.Code;
             existing.Name = request.Name;
             existing.Symbol = request.Symbol;
 

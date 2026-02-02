@@ -9,7 +9,7 @@ namespace AutoPartsShop.Converters
         {
             return new CurrencyResponse(
                 Id: entity.Id,
-                CurrencyCode: entity.CurrencyCode,
+                Code: entity.Code,
                 Name: entity.Name,
                 Symbol: entity.Symbol
             );
@@ -19,7 +19,7 @@ namespace AutoPartsShop.Converters
         {
             return new CurrencyEntity
             {
-                CurrencyCode = dto.CurrencyCode,
+                Code = dto.Code,
                 Name = dto.Name,
                 Symbol = dto.Symbol
             };
@@ -29,7 +29,7 @@ namespace AutoPartsShop.Converters
         {
             return new CurrencyEntity
             {
-                CurrencyCode = dto.CurrencyCode,
+                Code = dto.Code,
                 Name = dto.Name,
                 Symbol = dto.Symbol
             };
