@@ -12,7 +12,7 @@ namespace AutoPartsShop.Services
         public Task<IEnumerable<BrandResponse>> GetAllBrandsAsync();
         public Task<BrandResponse?> GetBrandByIdAsync(int id);
         public Task<BrandResponse> UpdateBrandAsync(int id, BrandUpdateRequest brand);
-        public Task DeleteBrandAsync(int id);
+        public Task<BrandResponse> DeleteBrandAsync(int id);
     }
 
     public class BrandService : IBrandService
@@ -54,10 +54,11 @@ namespace AutoPartsShop.Services
             return existing.ToDto();
         }
 
-        public async Task DeleteBrandAsync(int id)
+        public async Task<BrandResponse> DeleteBrandAsync(int id)
         {
             var brand = await _brandRepository.GetBrandByIdAsync(id) ?? throw new NotFoundException($"Brand with ID {id} not found.");
             await _brandRepository.DeleteBrandAsync(brand);
+            return brand.ToDto();
         }
     }
 }
