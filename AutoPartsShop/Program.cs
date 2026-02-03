@@ -125,7 +125,18 @@ if (app.Environment.IsDevelopment())
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
-app.UseHttpsRedirection();
+if (app.Environment.IsDevelopment())
+{
+    var httpsPort = builder.Configuration["ASPNETCORE_HTTPS_PORT"];
+    if (!string.IsNullOrWhiteSpace(httpsPort))
+    {
+        app.UseHttpsRedirection();
+    }
+}
+else
+{
+    app.UseHttpsRedirection();
+}
 app.UseAuthentication();
 app.UseAuthorization();
 
