@@ -1,6 +1,7 @@
 using AutoPartsShop.Services;
 using AutoPartsShop.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AutoPartsShop.Controllers
 {
@@ -14,7 +15,7 @@ namespace AutoPartsShop.Controllers
         {
             _countryService = countryService;
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<CountryResponse>> CreateCountryAsync([FromBody] CountryCreateRequest country)
         {
@@ -38,14 +39,14 @@ namespace AutoPartsShop.Controllers
             var countryEntity = await _countryService.GetCountryByIdAsync(id);
             return Ok(countryEntity);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id:long}")]
         async public Task<ActionResult> UpdateCountryAsync(long id, [FromBody] CountryUpdateRequest country)
         {
             var updated = await _countryService.UpdateCountryAsync(id, country);
             return Ok(updated);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id:long}")]
         async public Task<ActionResult<CountryResponse>> DeleteCountryAsync(long id)
         {

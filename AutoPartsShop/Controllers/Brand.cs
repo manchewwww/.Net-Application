@@ -1,5 +1,6 @@
 using AutoPartsShop.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using AutoPartsShop.Dtos;
 
 namespace AutoPartsShop.Controllers
@@ -14,7 +15,7 @@ namespace AutoPartsShop.Controllers
         {
             _brandService = brandService;
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<BrandResponse>> AddBrandAsync([FromBody] BrandCreateRequest brand)
         {
@@ -38,14 +39,14 @@ namespace AutoPartsShop.Controllers
             var brandEntity = await _brandService.GetBrandByIdAsync(id);
             return Ok(brandEntity);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id:long}")]
         async public Task<ActionResult> UpdateBrandAsync(long id, [FromBody] BrandUpdateRequest brand)
         {
             var updated = await _brandService.UpdateBrandAsync(id, brand);
             return Ok(updated);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id:long}")]
         async public Task<ActionResult<BrandResponse>> DeleteBrandAsync(long id)
         {

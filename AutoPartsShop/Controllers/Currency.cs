@@ -1,6 +1,7 @@
 using AutoPartsShop.Dtos;
 using AutoPartsShop.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AutoPartsShop.Controllers
 {
@@ -14,7 +15,7 @@ namespace AutoPartsShop.Controllers
         {
             _currencyService = currencyService;
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<CurrencyResponse>> AddCurrencyAsync([FromBody] CurrencyCreateRequest currency)
         {
@@ -39,14 +40,14 @@ namespace AutoPartsShop.Controllers
             var currencyEntity = await _currencyService.GetCurrencyByIdAsync(id);
             return Ok(currencyEntity);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id:long}")]
         async public Task<ActionResult> UpdateCurrencyAsync(long id, [FromBody] CurrencyUpdateRequest currency)
         {
             var updated = await _currencyService.UpdateCurrencyAsync(id, currency);
             return Ok(updated);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id:long}")]
         async public Task<ActionResult<CurrencyResponse>> DeleteCurrencyAsync(long id)
         {

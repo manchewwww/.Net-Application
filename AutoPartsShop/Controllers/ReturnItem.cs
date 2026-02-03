@@ -1,6 +1,7 @@
 using AutoPartsShop.Dtos;
 using AutoPartsShop.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AutoPartsShop.Controllers
 {
@@ -14,7 +15,7 @@ namespace AutoPartsShop.Controllers
         {
             _service = service;
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<ReturnItemResponse>> AddReturnItemAsync([FromBody] ReturnItemCreateRequest request)
         {
@@ -38,14 +39,14 @@ namespace AutoPartsShop.Controllers
             var entity = await _service.GetReturnItemByIdAsync(id);
             return Ok(entity);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id:long}")]
         public async Task<ActionResult> UpdateReturnItemAsync(long id, [FromBody] ReturnItemUpdateRequest request)
         {
             var updated = await _service.UpdateReturnItemAsync(id, request);
             return Ok(updated);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id:long}")]
         public async Task<ActionResult<ReturnItemResponse>> DeleteReturnItemAsync(long id)
         {

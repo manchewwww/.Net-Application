@@ -2,6 +2,8 @@ using AutoPartsShop.Converters;
 using AutoPartsShop.Dtos;
 using AutoPartsShop.Repositories;
 using AutoPartsShop.Exceptions;
+using AutoPartsShop.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace AutoPartsShop.Services
 {
@@ -17,15 +19,21 @@ namespace AutoPartsShop.Services
     public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _repository;
+        private readonly IPasswordHasher<CustomerEntity> _passwordHasher;
 
-        public CustomerService(ICustomerRepository repository)
+        public CustomerService(ICustomerRepository repository, IPasswordHasher<CustomerEntity> passwordHasher)
         {
             _repository = repository;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<CustomerResponse> AddCustomerAsync(CustomerCreateRequest request)
         {
             var entity = request.ToEntity();
+            if (!string.IsNullOrWhiteSpace(request.Password))
+            {
+                entity.PasswordHash = _passwordHasher.HashPassword(entity, request.Password);
+            }
             var created = await _repository.AddCustomerAsync(entity);
             return created.ToDto();
         }
@@ -47,7 +55,11 @@ namespace AutoPartsShop.Services
             var existing = await _repository.GetCustomerByIdAsync(id) ?? throw new NotFoundException("Customer with ID " + id + " not found.");
             existing.Email = request.Email;
             existing.Phone = request.Phone;
-            existing.PasswordHash = request.PasswordHash;
+            existing.IsAdmin = request.IsAdmin;
+            if (!string.IsNullOrWhiteSpace(request.Password))
+            {
+                existing.PasswordHash = _passwordHasher.HashPassword(existing, request.Password);
+            }
 
             await _repository.UpdateCustomerAsync(existing);
             return existing.ToDto();

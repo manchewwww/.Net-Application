@@ -1,6 +1,7 @@
 using AutoPartsShop.Dtos;
 using AutoPartsShop.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AutoPartsShop.Controllers
 {
@@ -14,7 +15,7 @@ namespace AutoPartsShop.Controllers
         {
             _service = service;
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<PartPriceResponse>> AddPartPriceAsync([FromBody] PartPriceCreateRequest request)
         {
@@ -38,14 +39,14 @@ namespace AutoPartsShop.Controllers
             var entity = await _service.GetPartPriceByIdAsync(id);
             return Ok(entity);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id:long}")]
         public async Task<ActionResult> UpdatePartPriceAsync(long id, [FromBody] PartPriceUpdateRequest request)
         {
             var updated = await _service.UpdatePartPriceAsync(id, request);
             return Ok(updated);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id:long}")]
         public async Task<ActionResult<PartPriceResponse>> DeletePartPriceAsync(long id)
         {

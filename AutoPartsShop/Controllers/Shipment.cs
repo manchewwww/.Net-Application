@@ -1,6 +1,7 @@
 using AutoPartsShop.Dtos;
 using AutoPartsShop.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AutoPartsShop.Controllers
 {
@@ -14,7 +15,7 @@ namespace AutoPartsShop.Controllers
         {
             _service = service;
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<ShipmentResponse>> AddShipmentAsync([FromBody] ShipmentCreateRequest request)
         {
@@ -38,14 +39,14 @@ namespace AutoPartsShop.Controllers
             var entity = await _service.GetShipmentByIdAsync(id);
             return Ok(entity);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id:long}")]
         public async Task<ActionResult> UpdateShipmentAsync(long id, [FromBody] ShipmentUpdateRequest request)
         {
             var updated = await _service.UpdateShipmentAsync(id, request);
             return Ok(updated);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id:long}")]
         public async Task<ActionResult<ShipmentResponse>> DeleteShipmentAsync(long id)
         {

@@ -11,7 +11,7 @@ namespace AutoPartsShop.Converters
                 Id: entity.Id,
                 Email: entity.Email,
                 Phone: entity.Phone,
-                PasswordHash: entity.PasswordHash
+                IsAdmin: entity.IsAdmin
             );
         }
 
@@ -21,7 +21,7 @@ namespace AutoPartsShop.Converters
             {
                 Email = dto.Email,
                 Phone = dto.Phone,
-                PasswordHash = dto.PasswordHash
+                IsAdmin = dto.IsAdmin
             };
         }
 
@@ -31,7 +31,7 @@ namespace AutoPartsShop.Converters
             {
                 Email = dto.Email,
                 Phone = dto.Phone,
-                PasswordHash = dto.PasswordHash
+                IsAdmin = dto.IsAdmin
             };
         }
     }
