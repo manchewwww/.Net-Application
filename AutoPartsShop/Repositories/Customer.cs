@@ -8,6 +8,7 @@ namespace AutoPartsShop.Repositories
         public Task<CustomerEntity> AddCustomerAsync(CustomerEntity entity);
         public Task<IEnumerable<CustomerEntity>> GetAllCustomersAsync();
         public Task<CustomerEntity?> GetCustomerByIdAsync(long id);
+        public Task<CustomerEntity?> GetCustomerByEmailAsync(string email);
         public Task UpdateCustomerAsync(CustomerEntity entity);
         public Task DeleteCustomerAsync(CustomerEntity entity);
     }
@@ -32,6 +33,11 @@ namespace AutoPartsShop.Repositories
         public async Task<CustomerEntity?> GetCustomerByIdAsync(long id)
         {
             return await GetByIdAsync(id);
+        }
+
+        public async Task<CustomerEntity?> GetCustomerByEmailAsync(string email)
+        {
+            return DbSet.FirstOrDefault(c => c.Email == email);
         }
 
         public async Task UpdateCustomerAsync(CustomerEntity entity)

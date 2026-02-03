@@ -423,6 +423,7 @@ namespace AutoPartsShop.Data
                 entity.Property(e => e.Email).HasColumnName("email").HasMaxLength(200);
                 entity.Property(e => e.Phone).HasColumnName("phone").HasMaxLength(40);
                 entity.Property(e => e.PasswordHash).HasColumnName("password_hash");
+                entity.Property(e => e.IsAdmin).HasColumnName("is_admin");
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
             });
