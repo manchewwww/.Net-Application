@@ -1,5 +1,6 @@
 using AutoPartsShop.Data;
 using AutoPartsShop.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutoPartsShop.Repositories
 {
@@ -37,7 +38,7 @@ namespace AutoPartsShop.Repositories
 
         public async Task<CustomerEntity?> GetCustomerByEmailAsync(string email)
         {
-            return DbSet.FirstOrDefault(c => c.Email == email);
+            return await DbSet.FirstOrDefaultAsync(c => c.Email == email);
         }
 
         public async Task UpdateCustomerAsync(CustomerEntity entity)
