@@ -1,5 +1,9 @@
 AGENTS.md
 .Net-Application.sln
+node_modules/
+dist/
+build/
+coverage/
 
 # Build outputs
 **/bin/

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -123,8 +124,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseDefaultFiles();
-app.UseStaticFiles();
+var clientBuildPath = Path.Combine(builder.Environment.ContentRootPath, "ClientApp", "build");
+if (Directory.Exists(clientBuildPath))
+{
+    app.UseDefaultFiles(new DefaultFilesOptions
+    {
+        FileProvider = new PhysicalFileProvider(clientBuildPath)
+    });
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(clientBuildPath)
+    });
+}
 if (app.Environment.IsDevelopment())
 {
     var httpsPort = builder.Configuration["ASPNETCORE_HTTPS_PORT"];
@@ -142,4 +153,11 @@ app.UseAuthorization();
 
 app.UseMiddleware<AutoPartsShop.Middlewares.ExceptionHandlingMiddleware>();
 app.MapControllers();
+if (Directory.Exists(clientBuildPath))
+{
+    app.MapFallbackToFile("index.html", new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(clientBuildPath)
+    });
+}
 app.Run();
