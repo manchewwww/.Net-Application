@@ -23,10 +23,10 @@ public sealed class ExceptionMiddleware
         {
             context.Response.StatusCode = StatusCodes.Status404NotFound;
             _logger.LogWarning(
-        "404 Not Found: {Message} Path={Path}",
-        ex.Message,
-        context.Request.Path.Value
-    );
+                "404 Not Found: {Message} Path={Path}",
+                ex.Message,
+                context.Request.Path.Value
+            );
             await context.Response.WriteAsJsonAsync(new { error = ex.Message });
         }
         catch (Exception ex)
