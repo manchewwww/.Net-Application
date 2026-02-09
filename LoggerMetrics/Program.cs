@@ -1,6 +1,8 @@
 using Serilog;
 using LoggerMetrics.Middleware;
 using LoggerMetrics.Services;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,17 @@ builder.Host.UseSerilog((ctx, services, lc) =>
       .ReadFrom.Services(services)
       .Enrich.FromLogContext()
 );
+
+builder.Services.AddOpenTelemetry()
+    .WithMetrics(m =>
+    {
+        m.SetResourceBuilder(
+             ResourceBuilder.CreateDefault()
+                 .AddService(serviceName: "LoggerMetrics"))
+         .AddAspNetCoreInstrumentation()
+         .AddRuntimeInstrumentation()
+         .AddPrometheusExporter();
+    });
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
@@ -25,6 +38,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<ExceptionMiddleware>();
+app.MapPrometheusScrapingEndpoint("/metrics");
 
 app.MapControllers();
 app.Run();
