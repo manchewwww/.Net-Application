@@ -3,9 +3,17 @@
   "profiles": {
     "MongoDbConnection": {
       "commandName": "Project",
-      "workingDirectory": ".",
       "launchBrowser": true,
       "applicationUrl": "http://localhost:5200",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "MongoDbConnection (dotnet)": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
+      "commandLineArgs": "run",
+      "workingDirectory": ".",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

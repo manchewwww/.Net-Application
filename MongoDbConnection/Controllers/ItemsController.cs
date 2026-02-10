@@ -26,7 +26,6 @@ public sealed class ItemsController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<Item>> GetByIdAsync(string id)
     {
-        Console.WriteLine(id);
         var item = await _service.GetByIdAsync(id);
         if (item is null)
         {
@@ -40,12 +39,11 @@ public sealed class ItemsController : ControllerBase
     public async Task<ActionResult<Item>> CreateAsync([FromBody] Item item)
     {
         await _service.CreateAsync(item);
-        Console.WriteLine(item.Id);
         if (string.IsNullOrWhiteSpace(item.Id))
         {
             return StatusCode(StatusCodes.Status201Created, item);
         }
-        return CreatedAtAction(nameof(GetByIdAsync), new { id = item.Id }, item);
+        return CreatedAtAction("GetById", new { id = item.Id }, item);
     }
 
     [HttpPut("{id}")]
