@@ -17,7 +17,7 @@ public sealed class ItemRepository
 
     public Task<List<Item>> GetAllAsync() => _items.Find(_ => true).ToListAsync();
 
-    public Task<Item?> GetByIdAsync(string id) => _items.Find(item => item.Id == id).FirstOrDefaultAsync();
+    public async Task<Item?> GetByIdAsync(string id) => await _items.Find(item => item.Id == id).FirstOrDefaultAsync();
 
     public Task CreateAsync(Item item) => _items.InsertOneAsync(item);
 

@@ -1,6 +1,7 @@
 using Logger.Models;
 using Logger.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Logger.Controllers;
 
@@ -25,6 +26,7 @@ public sealed class ItemsController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<Item>> GetByIdAsync(string id)
     {
+        Console.WriteLine(id);
         var item = await _service.GetByIdAsync(id);
         if (item is null)
         {
@@ -35,14 +37,19 @@ public sealed class ItemsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Item>> CreateAsync(Item item)
+    public async Task<ActionResult<Item>> CreateAsync([FromBody] Item item)
     {
         await _service.CreateAsync(item);
+        Console.WriteLine(item.Id);
+        if (string.IsNullOrWhiteSpace(item.Id))
+        {
+            return StatusCode(StatusCodes.Status201Created, item);
+        }
         return CreatedAtAction(nameof(GetByIdAsync), new { id = item.Id }, item);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateAsync(string id, Item item)
+    public async Task<IActionResult> UpdateAsync(string id, [FromBody] Item item)
     {
         item.Id = id;
         await _service.UpdateAsync(id, item);

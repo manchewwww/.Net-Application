@@ -16,11 +16,9 @@ builder.Services.AddScoped<ItemService>();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+
 
 app.MapControllers();
 app.Run();
